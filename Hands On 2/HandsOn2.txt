@@ -24,6 +24,8 @@
 (assert (sintoma nauseas))
 (assert (sintoma sensibilidad-a-la-luz))
 
+// En caso de querer buscar por algún parametro especifico se deberá eliminar la variable ?nombre e ingresar el nombre de la enfermedad
+// Ej.  (enfermedad influenza ?signo1 ?signo2 ?sintoma1 ?sintoma2)
 (defrule busca-enfermedad
  ?enf <- (enfermedad ?nombre ?signo1 ?signo2 ?sintoma1 ?sintoma2)
  => 
