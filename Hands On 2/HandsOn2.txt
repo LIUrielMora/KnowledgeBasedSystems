@@ -1,50 +1,61 @@
-(assert (enfermedad influenza fiebre sibilancias dolor-de-garganta congestión-nasal))
-(assert (enfermedad hipertensión dolor-de-cabeza dolor-en-las-articulaciones fatiga visión-borrosa))
-(assert (enfermedad asma sibilancias dolor-en-las-articulaciones dificultad-para-respirar tos))
-(assert (enfermedad gastroenteritis diarrea fiebre vomitos dolor-abdominal))
-(assert (enfermedad artritis dolor-en-las-articulaciones fiebre hinchazón rigidez))
-(assert (enfermedad migraña dolor-de-cabeza fiebre sensibilidad-a-la-luz fatiga))
+(assert (enfermedad varisela lesiones_en_piel fiebre perdida_de_apetito dolor_de_cabeza))
+(assert (enfermedad sarampion fiebre manchas_en_boca tos moqueo))
+(assert (enfermedad conjuntivitis ojos_rojos hinchazon_en_parpados picazon_ocular cuerpo_extraño_ocular))
+(assert (enfermedad escarlatina erupcion lengua_de_fresa escalofrios dolor_de_garganta))
+(assert (enfermedad influenza fiebre fatiga_visible tos dolor_de_garganta))
+(assert (enfermedad asma sibilancias dificultar_respirar_visible dolor_en_pecho tos))
 
-(assert (signo fiebre))
-(assert (signo dolor-de-cabeza))
-(assert (signo sibilancias))
-(assert (signo diarrea))
-(assert (signo dolor-en-las-articulaciones))
+(assert
+    (signo lesiones_en_piel)
+    (signo fiebre)
+    (signo manchas_en_boca)
+    (signo ojos_rojos)
+    (signo hinchazon_en_parpados)
+    (signo erupcion)
+    (signo lengua_de_fresa)
+    (signo fatiga_visible )
+    (signo sibilancias)
+    (signo dificultar_respirar_visible) 
+)
 
-(assert (sintoma dolor-de-garganta))
-(assert (sintoma congestión-nasal))
-(assert (sintoma fatiga))
-(assert (sintoma visión-borrosa))
-(assert (sintoma dificultad-para-respirar))
-(assert (sintoma tos))
-(assert (sintoma vomitos))
-(assert (sintoma dolor-abdominal))
-(assert (sintoma hinchazón))
-(assert (sintoma rigidez))
-(assert (sintoma nauseas))
-(assert (sintoma sensibilidad-a-la-luz))
+(assert
+    (sintoma perdida_de_apetito)
+    (sintoma dolor_de_cabeza)
+    (sintoma tos)
+    (sintoma moqueo)
+    (sintoma picazon_ocular)
+    (sintoma cuerpo_extraño_ocular)
+    (sintoma escalofrios)
+    (sintoma dolor_de_garganta)
+    (sintoma dolor_en_pecho )
+)
 
-// En caso de querer buscar por algún parametro especifico se deberá eliminar la variable ?nombre e ingresar el nombre de la enfermedad
-// Ej.  (enfermedad influenza ?signo1 ?signo2 ?sintoma1 ?sintoma2)
+; En caso de querer buscar por algún parametro especifico se deberá eliminar la variable ?nombre e ingresar el nombre de la enfermedad
+; Ej.  (enfermedad influenza)
+
+; ================ Busca Enfermedad ================
 (defrule busca-enfermedad
- ?enf <- (enfermedad ?nombre ?signo1 ?signo2 ?sintoma1 ?sintoma2)
+ ?enf <- (enfermedad ?nombre)
  => 
-    (printout t Enfermedad:  ?nombre crlf)
+    (printout t Enfermedad:  influenza crlf)
     (printout t signos:  ?signo1 ,  ?signo2 crlf)
     (printout t sintomas:   ?sintoma1 , ?sintoma2 crlf crlf))
 
+; ================ Busca Signo  ================
 (defrule busca-signo
  ?enf <- (signo ?signo)
  => 
 (printout t Signo: ?signo crlf crlf))
 
+; ================ Busca Sintoma  ================
 (defrule busca-sintoma
  ?enf <- (sintoma ?sintoma)
  => 
 (printout t Sintoma: ?sintoma crlf crlf))
 
+; ================ Elimina Enfermedad  ================
 (defrule eliminar-enfermedad
-    ?enf <- (enfermedad ?nombre ?signo1 ?signo2 ?sintoma1 ?sintoma2)
+    ?enf <- (enfermedad ?nombre)
     =>
     (retract ?enf)
     (printout t "Enfermedad: " ?nombre " eliminada." crlf)
